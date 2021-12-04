@@ -1,0 +1,15 @@
+var xs = [1.1, 1.9, 2.3, 1.8];
+
+var model = function() {
+  var sigma_ = uniform(0,10)
+  var mu_ = gaussian(0,31.627)
+  
+  map(
+    function(data) {
+      factor(Gaussian({mu: mu_, sigma: sigma_}).score(data));
+    },
+    xs);
+
+  return sigma_;
+};
+expectation(Infer({method: 'MCMC', samples: 100000, burn: 2000}, model));

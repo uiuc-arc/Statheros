@@ -1,0 +1,14 @@
+var xs = [4.667,8.814, 9.088];
+
+var model = function() {
+  var n = uniform(5, 50);
+  map(
+    function(data) {
+      factor(Gaussian({mu: n*0.5, sigma: Math.sqrt(0.25*n)}).score(data));
+    },
+    xs);
+
+  return n;
+};
+
+viz.auto(Infer({method: 'MCMC', samples: 100000, burn: 2000}, model));

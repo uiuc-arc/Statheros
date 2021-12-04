@@ -1,0 +1,34 @@
+def main(){ // didItRain
+    cloudy := flip(0.5);
+    rain := 0; sprinkler := 0; wetGrass :=1;
+
+    if (cloudy){
+        rain = flip(0.8);
+        sprinkler = flip(0.1);
+    }else{
+        rain = flip(0.2);
+        sprinkler = flip(0.5);
+    }
+
+
+    if (sprinkler){
+	    if (rain){
+		wetGrass = flip(0.99);
+	    } else {
+		wetGrass = flip(0.9);
+	    }
+    } else {
+	    if (rain){
+		wetGrass = flip(0.9);
+	    } else {
+		wetGrass = flip(0.01);
+	    }
+    }
+
+
+    observe(wetGrass);
+    //return rain; 
+    return rain;
+    //return Expectation(rain); 
+
+}

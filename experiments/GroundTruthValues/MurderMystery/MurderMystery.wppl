@@ -1,0 +1,19 @@
+var murderMystery = function() {
+  var aliceDunnit = flip(.3);
+  //display(aliceDunnit)
+
+  var withGun =  sample(Bernoulli({p:0.03*(aliceDunnit)+0.8*(!aliceDunnit)}))
+  //var withGun = ((aliceDunnit) ? sample(Bernoulli({p:0.03})) : sample(Bernoulli({p:0.8})));
+  //observe(withGun==true)
+  return aliceDunnit
+}
+
+var dist = Infer(
+  {method: 'enumerate'},
+  murderMystery);
+/*
+var dist = Infer(
+  {method: 'enumerate', maxExecutions: 100},
+  murderMystery);*/
+display(dist)
+//viz.auto(dist);

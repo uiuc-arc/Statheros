@@ -1,0 +1,47 @@
+// skipped
+
+def main(){
+    observedResults0 := 1;
+    observedResults1 := 1;
+    observedResults2 := 1;
+    observedResults3 := 1;
+    observedResults4 := 1;
+    observedResults5 := 1;
+    observedResults6 := 1;
+    observedResults7 := 1;
+    observedResults8 := 1;
+    observedResults9 := 1;
+
+
+
+    bias := beta(1,1);
+
+    tossResults0 := flip(bias);
+    tossResults1 := flip(bias);
+    tossResults2 := flip(bias);
+    tossResults3 := flip(bias);
+    tossResults4 := flip(bias);
+
+    tossResults5 := flip(bias);
+    tossResults6 := flip(bias);
+    tossResults7 := flip(bias);
+    tossResults8 := flip(bias);
+    tossResults9 := flip(bias);
+
+
+    observe(tossResults0 == observedResults0);
+    observe(tossResults1 == observedResults1);
+    observe(tossResults2 == observedResults2);
+    observe(tossResults3 == observedResults3);
+    observe(tossResults4 == observedResults4);
+
+    observe(tossResults5 == observedResults5);
+    observe(tossResults6 == observedResults6);
+    observe(tossResults7 == observedResults7);
+    observe(tossResults8 == observedResults8);
+    observe(tossResults9 == observedResults9);
+
+
+    return bias; // expected: (-2·bias+1+bias²)·(-9240·bias+-9240·bias³+13860·bias²+2310+2310·bias⁴)·[-1+bias≤0]·[-bias≤0]·bias⁴
+    // TODO: better simplification
+}

@@ -1,0 +1,60 @@
+var model = function() { // didItRain
+    var cloudy = flip(0.5);
+
+    if (cloudy){
+        var rain = flip(0.8);
+        var sprinkler = flip(0.1);
+      
+      if (sprinkler){
+	    if (rain){
+          var wetGrass = flip(0.99);
+          condition(wetGrass==1);
+              return rain;
+	    } else {
+          var wetGrass = flip(0.9);
+          condition(wetGrass==1);
+              return rain;
+	    }
+    } else {
+	    if (rain){
+          var wetGrass = flip(0.9);
+          condition(wetGrass==1);
+              return rain;
+	    } else {
+		var wetGrass =  flip(0.01);
+         condition(wetGrass==1);
+              return rain;
+	    }
+    }
+ 
+    }
+     else{
+        var rain = flip(0.2);
+        var sprinkler = flip(0.5);
+      if (sprinkler){
+	    if (rain){
+          var wetGrass = flip(0.99);
+          condition(wetGrass==1);
+              return rain;
+	    } else {
+          var wetGrass = flip(0.9);
+          condition(wetGrass==1);
+              return rain;
+	    }
+    } else {
+	    if (rain){
+          var wetGrass = flip(0.9);
+          condition(wetGrass==1);
+              return rain;
+	    } else {
+		var wetGrass =  flip(0.01);
+         condition(wetGrass==1);
+              return rain;
+	    }
+    }
+
+  //return Expectation(rain); 
+}
+}
+
+expectation(Infer({method: 'MCMC', samples: 1000000, burn: 2000}, model));

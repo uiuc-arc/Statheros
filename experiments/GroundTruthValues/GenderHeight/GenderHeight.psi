@@ -1,0 +1,12 @@
+
+
+def main(){
+
+    female := flip(0.5);
+    length := if female { gauss(64,3); } else { gauss(68,3); };
+    length2 := if female { gauss(64,3); } else { gauss(68,3); };
+    cobserve(length,64.5);
+    cobserve(length2,65.0);
+
+    return female;
+}

@@ -1,0 +1,6 @@
+Infer({method: "enumerate"}, function() {
+  var a = flip();
+  var b = flip();
+  condition(a || b);
+  return a;
+})

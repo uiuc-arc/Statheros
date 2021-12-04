@@ -1,0 +1,60 @@
+var altimeter = function() {
+    globalStore.H_L = flip(0.3);
+    globalStore.U_A = flip(0.5);
+    globalStore.H_B = flip(0.1);
+
+    if (globalStore.U_A==true){
+      if (globalStore.H_L==true){
+        globalStore.S_L = flip(0.5);
+      } else {
+        globalStore.S_L = flip(1);
+      }   
+      
+    } else {
+         if (globalStore.H_L==true){
+           globalStore.S_L = flip(0.5);
+         } else {
+           globalStore.S_L = flip(0);
+         }
+    }
+  
+  
+  
+   if (globalStore.U_A==true){
+      if (globalStore.H_B==true){
+        globalStore.S_B = flip(0.5);
+      } else {
+        globalStore.S_B = flip(1);
+      }   
+      
+    } else {
+         if (globalStore.H_B==true){
+           globalStore.S_B = flip(0.5);
+         } else {
+           globalStore.S_B = flip(0);
+         }
+    }
+  
+  
+    if (globalStore.U_A==false){
+        globalStore.S_S = sample(Categorical({ps:[0.7,0.1,0.2],vs: [0,1,2]}));
+    } else {
+        globalStore.S_S = sample(Categorical({ps:[0.1,0.7,0.2],vs: [0,1,2]}));
+    }
+   
+          
+      condition(globalStore.S_L==true);
+      condition(globalStore.S_B==true);
+      condition(globalStore.S_S==true);
+      return globalStore.H_L;
+}
+
+var dist = Infer(
+  {method: 'enumerate'},
+  altimeter);
+/*
+var dist = Infer(
+  {method: 'enumerate', maxExecutions: 100},
+  murderMystery);*/
+display(dist)
+//viz.auto(dist);

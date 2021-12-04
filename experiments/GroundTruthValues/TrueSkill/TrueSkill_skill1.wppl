@@ -1,0 +1,18 @@
+var model = function() {
+  var skill1 = gaussian(100, 10);
+  var skill2 = gaussian(100, 10);
+  var skill3 = gaussian(100, 10);
+
+ var perf1 = gaussian(skill1, 15);
+ var perf2 = gaussian(skill2, 15);
+ var perf3 = gaussian(skill3, 15);
+
+ condition(perf1>perf2);
+ condition(perf2>perf3);
+ condition(perf1>perf3);
+ return skill1
+}
+
+
+expectation(Infer({method: 'MCMC', samples: 100000}, model));
+//expected: 104.67

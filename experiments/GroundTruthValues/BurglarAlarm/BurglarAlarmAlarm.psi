@@ -1,0 +1,39 @@
+
+def main(){ // isBurglary
+    earthquake := flip(0.002);
+    burglary := flip(0.001);
+
+    alarm := 0;
+    JohnCalls := 0;
+    MaryCalls := 0;
+
+    if earthquake{
+        if burglary{
+            alarm = flip(0.95);
+        }else{
+            alarm = flip(0.29);
+        }
+    }else{
+        if burglary{
+            alarm = flip(0.94);
+        }else{
+            alarm = flip(0.001);
+        }
+    }
+
+
+
+	if alarm{
+	    JohnCalls = flip(0.9);
+	    MaryCalls = flip(0.7);
+	}else{
+	    JohnCalls = flip(0.05);
+	    MaryCalls = flip(0.01);
+	}
+   
+	
+    called := JohnCalls && MaryCalls;
+    observe(called);
+
+    return alarm; 
+}

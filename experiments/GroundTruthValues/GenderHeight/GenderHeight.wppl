@@ -1,0 +1,17 @@
+
+var model = function() {
+
+    var female = flip(0.5);
+    /*var length = female ?  gaussian(64,3) :  gaussian(68,3) ;
+    var length2 = female ?  gaussian(64,3) :  gaussian(68,3) ;
+    observe(length,64.5);
+    observe(length2,65.0);*/
+
+  observe(Gaussian({mu: female ? 64 : 68, sigma: 3}), 64.5);
+  observe(Gaussian({mu: female ? 64 : 68, sigma: 3}), 65.);
+
+  
+    return female;
+}
+
+viz.auto(Infer({method: 'MCMC', samples: 100000}, model));

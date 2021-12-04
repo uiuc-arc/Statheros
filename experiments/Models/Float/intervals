@@ -1,0 +1,42 @@
+#!/usr/bin/env python
+import os
+import sys
+
+def copy_file(filename):
+	os.system("cp " + filename + " tmp_compile.cpp")
+	
+
+def replace_fixed():
+	with open('tmp_compile.cpp', 'r') as file :
+		filedata = file.read()
+
+	# Replace the target string
+	"""
+	filedata = filedata.replace('ppl::mh(model, NUM_SAMPLES, burn_in_samples);', \
+		"analysis::getBothSizes(model);\
+		std::cout << \"-----\" << std::endl; \
+		globals::printIntervals(); \
+		std::cout << \"-----\" << std::endl; \
+		globals::printLikelihoodIntervals(); \
+		std::cout << \"-----\" << std::endl; \
+		globals::printBiggestIntervals(); \
+		std::cout << \"-----\" << std::endl; exit(0);")
+	"""
+	filedata = filedata.replace('ppl::mh(model, NUM_SAMPLES, burn_in_samples);', \
+		"analysis::getBothSizes(model); exit(0);")
+
+	# Write the file out again
+	with open('tmp_compile2.cpp', 'w') as file:
+		file.write(filedata)
+
+def run(filename):
+	copy_file(filename)
+	replace_fixed()
+	os.system("g++-7 -std=c++17 tmp_compile2.cpp && ./a.out")
+	os.system("rm tmp_compile.cpp ; rm tmp_compile2.cpp ; rm a.out")
+
+
+
+if __name__ == "__main__":
+	filename = sys.argv[1]
+	run(filename)

@@ -1,0 +1,58 @@
+var electricPower = function() {
+    globalStore.command_relay = flip(0.5);
+    globalStore.health_relay = sample(Categorical({ps:[0.999,0.0005,0.0005],vs: [0,1,2]}));
+  
+    if (globalStore.command_relay==false){
+      if (globalStore.health_relay==0){
+        globalStore.s_r = flip(0);
+      } else if (globalStore.health_relay==1){
+                globalStore.s_r = flip(0);
+      } else { //health_relay==2
+                globalStore.s_r = flip(1);
+      }
+      
+    } else {
+      if (globalStore.health_relay==0){
+        globalStore.s_r = flip(1);
+      } else if (globalStore.health_relay==1){
+                globalStore.s_r = flip(0);
+      } else { //health_relay==2
+                globalStore.s_r = flip(1);
+      }
+    }
+                
+          
+   globalStore.health_sensor = sample(Categorical({ps:[0.999,0.0005,0.0005],vs: [0,1,2]}));
+
+  
+   if (globalStore.s_r==false){
+        if (globalStore.health_sensor==0){
+          globalStore.feedback = flip(0);
+        } else if (globalStore.health_sensor==1){
+          globalStore.feedback = flip(0);
+        } else { //health_relay==2
+          globalStore.feedback = flip(1);
+        }
+      
+    } else {
+      if (globalStore.health_sensor==0){
+        globalStore.feedback = flip(1);
+      } else if (globalStore.health_sensor==1){
+        globalStore.feedback = flip(0);
+      } else { //health_relay==2
+        globalStore.feedback = flip(1);
+      }
+    }
+      condition(globalStore.feedback==true);
+      return globalStore.command_relay;
+}
+
+var dist = Infer(
+  {method: 'MCMC',samples: 50000},
+  electricPower);
+/*
+var dist = Infer(
+  {method: 'enumerate', maxExecutions: 100},
+  murderMystery);*/
+display(dist)
+//viz.auto(dist);
